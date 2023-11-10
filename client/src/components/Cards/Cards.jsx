@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./Cards.css";
 
 export const Cards = ({ count, setCount }) => {
   const URL = "https://harry-potter-api.onrender.com/libros";
@@ -29,6 +30,7 @@ export const Cards = ({ count, setCount }) => {
           throw new Error("Error al obtener las portadas");
         }
         const dataPortadas = await portadas.json();
+
         setPortadas(dataPortadas);
         console.log(dataPortadas);
       } catch (error) {
@@ -41,23 +43,34 @@ export const Cards = ({ count, setCount }) => {
   return (
     <section className="books-container">
       {books.map((book) => (
-        <div key={book.id}>
-          <h1>{book.libro}</h1>
-          <p>{book.price}</p>
-          <p>{book.stock}</p>
-          {portadas.length > 0 && (
+        <div className="book" key={book.id}>
+          {portadas.length && (
             <img
               src={portadas.find((portada) => portada.id === book.id).portada}
               alt=""
+              className="book-cover"
+              width={200}
+              height={300}
             />
           )}
-          <button
-            onClick={() => {
-              setCount((count += 1));
-            }}
-          >
-            Comprar!!
-          </button>
+          <div key={book.id} className="book-info">
+            <h1 className="book-title">{book.libro}</h1>
+            <p className="book-price">$ {book.price}</p>
+            {book.stock === 0 ? (
+              <p>AGOTADO</p>
+            ) : (
+              <div>
+                <p className="book-stock">STOCK {book.stock}</p>
+                <button
+                  onClick={() => {
+                    setCount((count += 1));
+                  }}
+                >
+                  AÑADIR AL CARRITO
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       ))}
     </section>

@@ -1,0 +1,30 @@
+.books-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.book{
+    background-color: #ffffff;
+    padding: 1.15em;
+    display: flex;
+    width: 25em;
+    line-height: 2.5em;
+    gap: 1em;
+}
+
+.book-info{
+    line-height: 2.5em;
+}
+
+.book button{
+    border: none;
+    padding: 1em;
+    background-color: #e4e5e2;
+    cursor: pointer;
+}
+
+.book-title{
+    font-size: 1.3em;
+    font-family: system-ui;
+}
